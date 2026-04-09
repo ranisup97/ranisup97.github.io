@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Merdeka Apps</title>
+</head>
+<body>
+  <h2>Membuka Merdeka Apps...</h2>
+  <p>Jika aplikasi belum terinstall, silakan download terlebih dahulu.</p>
+  <a id="playstore" href="https://play.google.com/store/apps/details?id=com.mdka.merdekaapps">
+    Download di Play Store
+  </a>
+  <a id="appstore" href="https://apps.apple.com/app/idXXXXXXXX">
+    Download di App Store
+  </a>
+
+  <script>
+    const path = window.location.pathname; // /ratingCarpool
+    const ua = navigator.userAgent;
+
+    // Coba buka app dengan custom scheme sebagai fallback
+    window.location = `merdekaapp:/${path}`;
+
+    // Kalau app tidak ada, arahkan ke store setelah 2.5 detik
+    setTimeout(() => {
+      if (/android/i.test(ua)) {
+        window.location = 'https://play.google.com/store/apps/details?id=com.mdka.merdekaapps';
+      } else if (/iphone|ipad/i.test(ua)) {
+        window.location = 'https://apps.apple.com/app/idXXXXXXXX';
+      }
+    }, 2500);
+  </script>
+</body>
+</html>
